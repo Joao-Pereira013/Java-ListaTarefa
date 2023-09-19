@@ -4,63 +4,66 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListaTarefa {
-  private List<Tarefa> tarefaList;
+    // Atributos
+    private List<Tarefa> tarefaList;
 
-  // Construtor da classe ListaTarefa
-  public ListaTarefa() {
-    this.tarefaList = new ArrayList<>();
-  }
+    // Construtor
+    public ListaTarefa() {
+        this.tarefaList = new ArrayList<>();
+    }
 
-  // Método para adicionar tarefas na lista
-  public void adicionarTarefa(String descricao){
-    Tarefa tarefa = new Tarefa(descricao);
-    tarefaList.add(tarefa);
-  }
+    // Adiciona uma nova tarefa à lista
+    public void adicionarTarefa(String descricao) {
+        Tarefa tarefa = new Tarefa(descricao);
+        tarefaList.add(tarefa);
+    }
 
-  // Método para retornar o tamanho da lista
-  public int tamanhoLista(){
-    return tarefaList.size();
-  }
+    // Remove tarefas com uma descrição específica da lista
+    public void removerTarefa(String descricao) {
+        List<Tarefa> tarefasRemover = new ArrayList<>();
+        for (Tarefa tarefa : tarefaList) {
+            if (tarefa.getDescricao().equals(descricao)) {
+                tarefasRemover.add(tarefa);
+            }
+        }
+        tarefaList.removeAll(tarefasRemover);
+    }
 
-  // Método para remover tarefas da lista
-  public void removerTarefa(String descricao){
-    List<Tarefa> tarefasRemover = new ArrayList<>();
-     if(!tarefaList.isEmpty()){
-       for(Tarefa tarefa : tarefaList){
-         if(tarefa.getDescricao().equals(descricao)){
-           tarefasRemover.add(tarefa);
-         }
-       }
-       tarefaList.removeAll(tarefasRemover);
-     }else{
-       System.out.println("Lista de tarefas vazia");
-     }
-  }
+    // Retorna o tamanho atual da lista de tarefas
+    public int tamanhoLista() {
+        return tarefaList.size();
+    }
 
-  public static void main(String [] args){
-    ListaTarefa listaTarefa = new ListaTarefa();
-    
-    // Adicionando tarefas na lista
-    listaTarefa.adicionarTarefa("Estudar Java");
-    listaTarefa.adicionarTarefa("Estudar Spring");
-    listaTarefa.adicionarTarefa("Estudar Spring Boot");
-    listaTarefa.adicionarTarefa("Estudar Spring Data JPA");
+    // Exibe a lista de tarefas atual
+    public void mostrarListaTarefas() {
+        System.out.println("Lista de Tarefas:");
+        for (Tarefa tarefa : tarefaList) {
+            System.out.println("- " + tarefa.getDescricao());
+        }
+    }
 
-    // Imprimindo a lista de tarefas
-    System.out.println(
-    "Quantidade de tarefas a fazer: " + listaTarefa.tamanhoLista() + " Tarefas" + 
-    "\nLista de tarefas: " + listaTarefa.tarefaList + "\n");
-
-    // Removendo tarefas da lista
-    listaTarefa.removerTarefa("Estudar Spring Boot");
-
-    // Imprimindo a lista de tarefas atualizada
-    System.out.println(
-    "Agora você tem que fazer: " + listaTarefa.tamanhoLista() + " Tarefas" +
-    "\nLista de tarefas: " + listaTarefa.tarefaList);
-
-
-  }
-
+    public static void main(String[] args) {
+        ListaTarefa listaTarefa = new ListaTarefa();
+        
+        // Adiciona tarefas à lista
+        listaTarefa.adicionarTarefa("Estudar Java");
+        listaTarefa.adicionarTarefa("Estudar Spring");
+        listaTarefa.adicionarTarefa("Estudar Spring Boot");
+        listaTarefa.adicionarTarefa("Estudar Spring Data JPA");
+        
+        // Exibe a quantidade de tarefas na lista
+        System.out.println("Quantidade de tarefas a fazer: " + listaTarefa.tamanhoLista() + " Tarefas\n");
+        
+        // Exibe a lista de tarefas
+        listaTarefa.mostrarListaTarefas();
+        
+        // Remove uma tarefa da lista
+        listaTarefa.removerTarefa("Estudar Spring Boot");
+        
+        // Exibe a quantidade de tarefas na lista
+        System.out.println("\nAgora você tem que fazer: " + listaTarefa.tamanhoLista() + " Tarefas\n");
+        
+        // Exibe a lista de tarefas
+        listaTarefa.mostrarListaTarefas();
+    }
 }
-
